@@ -25,7 +25,7 @@ Plant List
             type="text"
             class="form-control"
             name="search"
-            placeholder="Search plant..."
+            placeholder="Search by plant name or category..."
             value="{{ search }}">
 
         <button class="btn btn-primary">
@@ -41,67 +41,180 @@ Plant List
 
 </form>
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover align-middle">
 
     <thead class="table-success">
 
-    <tr>
-        <th>Image</th>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th width="180">Action</th>
-    </tr>
+        <tr>
+            <th width="100">Image</th>
+            <th width="70">ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th width="120">Price</th>
+            <th width="120">Quantity</th>
+            <th width="180">Action</th>
+        </tr>
 
     </thead>
 
     <tbody>
 
-    {% for plant in plants %}
+    {% if plants %}
 
-    <tr>
+        {% for plant in plants %}
 
-        <td>{{ plant.id }}</td>
-        <td>
+        <tr>
+            <div class="modal fade"
+     id="deleteModal{{ plant.id }}"
+     tabindex="-1">
 
-    {% if plant.image %}
-        <img src="{{ url_for('static', filename='uploads/' + plant.image) }}"
-            width="80"
-            height="80"
-            class="img-thumbnail">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header bg-danger text-white">
+
+                <h5 class="modal-title">
+                    Delete Plant
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <p>
+
+                    Are you sure you want to delete
+
+                    <strong>{{ plant.name }}</strong> ?
+
+                </p>
+
+                <p class="text-danger">
+
+                    This action cannot be undone.
+
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <a
+                    href="{{ url_for('plants.delete_plant', id=plant.id) }}"
+                    class="btn btn-danger">
+
+                    Delete
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+            <!-- Image -->
+            <td class="text-center">
+
+                {% if plant.image %}
+
+                    <img
+                        src="{{ url_for('static', filename='uploads/' + plant.image) }}"
+                        style="width:80px; height:80px; object-fit:cover;"
+                        class="img-thumbnail rounded">
+
+                {% else %}
+
+                    <img
+                        src="{{ url_for('static', filename='images/no-image.png') }}"
+                        style="width:80px; height:80px; object-fit:cover;"
+                        class="img-thumbnail rounded">
+
+                {% endif %}
+
+            </td>
+
+            <!-- ID -->
+            <td>{{ plant.id }}</td>
+
+            <!-- Name -->
+            <td>
+
+                <a
+                    href="{{ url_for('plants.plant_details', id=plant.id) }}"
+                    class="text-decoration-none fw-bold">
+
+                    {{ plant.name }}
+
+                </a>
+
+            </td>
+
+            <!-- Category -->
+            <td>{{ plant.category }}</td>
+
+            <!-- Price -->
+            <td>₹ {{ plant.price }}</td>
+
+            <!-- Quantity -->
+            <td>{{ plant.quantity }}</td>
+
+            <!-- Actions -->
+            <td>
+
+                <a
+                    href="{{ url_for('plants.edit_plant', id=plant.id) }}"
+                    class="btn btn-warning btn-sm">
+
+                    Edit
+
+                </a>
+
+                <button
+    class="btn btn-danger btn-sm"
+    data-bs-toggle="modal"
+    data-bs-target="#deleteModal{{ plant.id }}">
+
+    Delete
+
+    </button>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
     {% else %}
-        <img src="{{ url_for('static', filename='images/no-image.png') }}"
-            width="80"
-            height="80"
-            class="img-thumbnail">
+
+        <tr>
+
+            <td colspan="7" class="text-center text-muted">
+
+                No plants found.
+
+            </td>
+
+        </tr>
+
     {% endif %}
-
-</td>
-        <td>{{ plant.name }}</td>
-        <td>{{ plant.category }}</td>
-        <td>₹ {{ plant.price }}</td>
-        <td>{{ plant.quantity }}</td>
-
-        <td>
-
-            <a class="btn btn-warning btn-sm"
-               href="{{ url_for('plants.edit_plant', id=plant.id) }}">
-                Edit
-            </a>
-
-            <a class="btn btn-danger btn-sm"
-               href="{{ url_for('plants.delete_plant', id=plant.id) }}"
-               onclick="return confirm('Delete this plant?')">
-                Delete
-            </a>
-
-        </td>
-
-    </tr>
-
-    {% endfor %}
 
     </tbody>
 

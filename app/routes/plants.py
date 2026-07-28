@@ -144,6 +144,17 @@ def plant_list():
     )
 
 
+@plants.route("/plants/<int:id>")
+def plant_details(id):
+
+    plant = Plant.query.get_or_404(id)
+
+    return render_template(
+        "plant_details.html",
+        plant=plant
+    )
+
+
 # ==========================================================
 # EDIT PLANT
 # ==========================================================
