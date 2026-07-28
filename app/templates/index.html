@@ -1,16 +1,57 @@
 {% extends "base.html" %}
 
-{% block title %}
-Home
-{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
 
-<h2>Welcome to Nursery Management System</h2>
+<h2 class="mb-4">🌱 Nursery Dashboard</h2>
 
-<p>
-Manage plants, inventory, and bookings efficiently.
-</p>
-<h2> Hello Bablu</h2>
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="card text-bg-success mb-3">
+            <div class="card-body">
+                <h5>Total Plants</h5>
+                <h2>{{ total_plants }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-bg-primary mb-3">
+            <div class="card-body">
+                <h5>Total Quantity</h5>
+                <h2>{{ total_quantity }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-bg-warning mb-3">
+            <div class="card-body">
+                <h5>Categories</h5>
+                <h2>{{ total_categories }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-bg-danger mb-3">
+            <div class="card-body">
+                <h5>Low Stock</h5>
+                <h2>{{ low_stock }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<a href="{{ url_for('plants.plant_list') }}" class="btn btn-success">
+    View Plants
+</a>
+
+<a href="{{ url_for('plants.add_plant') }}" class="btn btn-primary">
+    Add Plant
+</a>
 
 {% endblock %}
