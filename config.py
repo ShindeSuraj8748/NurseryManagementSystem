@@ -9,3 +9,4 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOAD_FOLDER = "app/static/uploads"
+    MAX_CONTENT_LENGTH = 2 * 1024 * 1024

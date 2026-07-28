@@ -56,6 +56,28 @@ Edit Plant
                        name="quantity"
                        value="{{ plant.quantity }}">
             </div>
+            <div class="mb-3">
+    <label class="form-label">Current Image</label><br>
+
+    {% if plant.image %}
+        <img
+            src="{{ url_for('static', filename='uploads/' + plant.image) }}"
+            width="120"
+            class="img-thumbnail mb-2">
+    {% else %}
+        <p>No Image</p>
+    {% endif %}
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Upload New Image</label>
+
+    <input
+        type="file"
+        class="form-control"
+        name="image"
+        accept="image/*">
+</div>
 
             <button class="btn btn-warning">
                 Update Plant

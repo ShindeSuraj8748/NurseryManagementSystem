@@ -66,19 +66,17 @@ Plant List
         <td>{{ plant.id }}</td>
         <td>
 
-{% if plant.image %}
-
-<img
-    src="{{ url_for('static', filename='uploads/' + plant.image) }}"
-    width="80"
-    height="80"
-    class="rounded">
-
-{% else %}
-
-No Image
-
-{% endif %}
+    {% if plant.image %}
+        <img src="{{ url_for('static', filename='uploads/' + plant.image) }}"
+            width="80"
+            height="80"
+            class="img-thumbnail">
+    {% else %}
+        <img src="{{ url_for('static', filename='images/no-image.png') }}"
+            width="80"
+            height="80"
+            class="img-thumbnail">
+    {% endif %}
 
 </td>
         <td>{{ plant.name }}</td>
