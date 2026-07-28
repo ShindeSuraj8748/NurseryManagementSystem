@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plant List</title>
+</head>
+<body>
+
+<h1>All Plants</h1>
+
+<a href="{{ url_for('plants.add_plant') }}">Add New Plant</a>
+<br><br>
+<th>Action</th>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Edit Option</th>
+    </tr>
+
+    {% for plant in plants %}
+    <tr>
+        <td>{{ plant.id }}</td>
+        <td>{{ plant.name }}</td>
+        <td>{{ plant.category }}</td>
+        <td>{{ plant.price }}</td>
+        <td>{{ plant.quantity }}</td>
+        <td>
+    <a href="{{ url_for('plants.edit_plant', id=plant.id) }}">Edit</a>
+    <a href="{{ url_for('plants.delete_plant', id=plant.id) }}"
+   onclick="return confirm('Are you sure you want to delete this plant?')">
+   Delete
+</a>
+</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>
