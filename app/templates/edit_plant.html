@@ -24,21 +24,32 @@ Edit Plant
                        value="{{ plant.name }}">
             </div>
 
-           <select class="form-select" name="category">
+<div class="mb-3">
 
-    {% for category in categories %}
+    <label class="form-label">
+        Category
+    </label>
+
+    <select
+        class="form-select"
+        name="category_id"
+        required>
+
+        {% for category in categories %}
 
         <option
-            value="{{ category }}"
-            {% if plant.category == category %}selected{% endif %}>
+            value="{{ category.id }}"
+            {% if plant.category_id == category.id %}selected{% endif %}>
 
-            {{ category }}
+            {{ category.name }}
 
         </option>
 
-    {% endfor %}
+        {% endfor %}
 
-</select>
+    </select>
+
+</div>
 
             <div class="mb-3">
                 <label class="form-label">Price</label>

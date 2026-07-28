@@ -1,5 +1,5 @@
-from app.database import db
 from datetime import datetime
+from app.database import db
 
 
 class Plant(db.Model):
@@ -7,15 +7,50 @@ class Plant(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    name = db.Column(db.String(100), nullable=False)
+    name = db.Column(
+        db.String(100),
+        nullable=False
+    )
 
-    category = db.Column(db.String(50), nullable=False)
+    category_id = db.Column(
+        db.Integer,
+        db.ForeignKey("categories.id"),
+        nullable=False
+    )
 
-    price = db.Column(db.Numeric(10, 2), nullable=False)
+    category_obj = db.relationship(
+        "Category",
+        back_populates="plants"
+    )
 
-    quantity = db.Column(db.Integer, nullable=False, default=0)
+    price = db.Column(
+        db.Numeric(10, 2),
+        nullable=False
+    )
 
     image = db.Column(db.String(255))
-    
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow
+    )
+
+    batches = db.relationship(
+        "PlantBatch",
+        back_populates="plant",
+        cascade="all, delete-orphan"
+    )
+
+    @property
+    def stock(self):
+        return sum(
+            batch.estimated_plants
+            for batch in self.batches
+            if batch.status != "Sold"
+        )
+
+    @property
+    def category(self):
+        if self.category_obj:
+            return self.category_obj.name
+        return ""

@@ -51,7 +51,7 @@ Plant List
             <th>Name</th>
             <th>Category</th>
             <th width="120">Price</th>
-            <th width="120">Quantity</th>
+            <th width="120">Current Stock</th>
             <th width="180">Action</th>
         </tr>
 
@@ -168,13 +168,13 @@ Plant List
             </td>
 
             <!-- Category -->
-            <td>{{ plant.category }}</td>
+            <td>{{ plant.category_obj.name }}</td>
 
             <!-- Price -->
             <td>₹ {{ plant.price }}</td>
 
             <!-- Quantity -->
-            <td>{{ plant.quantity }}</td>
+            <td>{{ plant.stock }}</td>
 
             <!-- Actions -->
             <td>

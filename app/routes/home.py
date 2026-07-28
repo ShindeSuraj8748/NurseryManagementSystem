@@ -1,8 +1,10 @@
 from flask import Blueprint, render_template
 from sqlalchemy import func
 
-from app.models import Plant
 from app.database import db
+from app.models import Plant
+from app.models import Category
+from app.models import PlantBatch
 
 main = Blueprint("main", __name__)
 
@@ -10,19 +12,27 @@ main = Blueprint("main", __name__)
 @main.route("/")
 def home():
 
+    # Total plant types
     total_plants = Plant.query.count()
 
-    total_quantity = db.session.query(
-        func.sum(Plant.quantity)
-    ).scalar() or 0
+    # Total available stock from all batches
+    total_quantity = (
+        db.session.query(
+            func.coalesce(func.sum(PlantBatch.estimated_plants), 0)
+        ).scalar()
+    )
 
-    total_categories = db.session.query(
-        Plant.category
-    ).distinct().count()
+    # Total categories
+    total_categories = Category.query.count()
 
-    low_stock = Plant.query.filter(
-        Plant.quantity < 10
-    ).count()
+    # Plants having stock less than 10
+    low_stock = 0
+
+    plants = Plant.query.all()
+
+    for plant in plants:
+        if plant.stock < 10:
+            low_stock += 1
 
     return render_template(
         "index.html",

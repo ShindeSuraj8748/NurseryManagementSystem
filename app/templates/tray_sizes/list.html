@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}
+Tray Sizes
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between mb-3">
+
+    <h2>Tray Sizes</h2>
+
+    <a href="{{ url_for('tray.add_tray') }}"
+       class="btn btn-success">
+
+        + Add Tray
+
+    </a>
+
+</div>
+
+<form method="GET">
+
+<div class="input-group mb-3">
+
+<input
+class="form-control"
+name="search"
+placeholder="Search tray..."
+value="{{ search }}">
+
+<button class="btn btn-primary">
+
+Search
+
+</button>
+
+<a
+class="btn btn-secondary"
+href="{{ url_for('tray.tray_list') }}">
+
+Clear
+
+</a>
+
+</div>
+
+</form>
+
+<table class="table table-bordered">
+
+<thead class="table-success">
+
+<tr>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Rows</th>
+
+<th>Columns</th>
+
+<th>Plants</th>
+
+<th>Status</th>
+
+<th width="180">Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for tray in trays %}
+
+<tr>
+
+<td>{{ tray.id }}</td>
+
+<td>{{ tray.name }}</td>
+
+<td>{{ tray.rows }}</td>
+
+<td>{{ tray.columns }}</td>
+
+<td>{{ tray.plants_per_tray }}</td>
+
+<td>{{ tray.status }}</td>
+
+<td>
+
+<a
+class="btn btn-warning btn-sm"
+href="{{ url_for('tray.edit_tray',id=tray.id) }}">
+
+Edit
+
+</a>
+
+<a
+class="btn btn-danger btn-sm"
+href="{{ url_for('tray.delete_tray',id=tray.id) }}">
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% endblock %}

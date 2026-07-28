@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+Production
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+<h2>Production Batches</h2>
+
+<a
+href="{{ url_for('batches.add_batch') }}"
+class="btn btn-success">
+
++ Add Batch
+
+</a>
+
+</div>
+
+{% endblock %}

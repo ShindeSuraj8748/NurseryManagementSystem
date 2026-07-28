@@ -1,5 +1,6 @@
 import os
 import uuid
+from app.models import Plant, Category
 
 from flask import (
     Blueprint,
@@ -59,7 +60,7 @@ def add_plant():
     if request.method == "POST":
 
         name = request.form["name"]
-        category = request.form["category"]
+        category_id = request.form["category_id"]
         price = request.form["price"]
         quantity = request.form["quantity"]
 
@@ -88,12 +89,12 @@ def add_plant():
             )
 
         new_plant = Plant(
-            name=name,
-            category=category,
-            price=price,
-            quantity=quantity,
-            image=filename,
-        )
+        name=name,
+        category_id=category_id,
+        price=price,
+        quantity=quantity,
+        image=filename,
+    )
 
         db.session.add(new_plant)
         db.session.commit()
@@ -104,7 +105,7 @@ def add_plant():
 
     return render_template(
         "add_plant.html",
-        categories=CATEGORIES,
+        categories = Category.query.order_by(Category.name).all()
     )
 
 
@@ -122,7 +123,9 @@ def plant_list():
             Plant.query.filter(
                 or_(
                     Plant.name.ilike(f"%{search}%"),
-                    Plant.category.ilike(f"%{search}%"),
+                    Plant.category_obj.has(
+    Category.name.ilike(f"%{search}%")
+)
                 )
             )
             .order_by(Plant.id.desc())
@@ -166,7 +169,7 @@ def edit_plant(id):
     if request.method == "POST":
 
         plant.name = request.form["name"]
-        plant.category = request.form["category"]
+        plant.category_id = request.form["category_id"]
         plant.price = request.form["price"]
         plant.quantity = request.form["quantity"]
 
@@ -217,7 +220,7 @@ def edit_plant(id):
     return render_template(
         "edit_plant.html",
         plant=plant,
-        categories=CATEGORIES,
+        categories = Category.query.order_by(Category.name).all()
     )
 
 

@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Batch
+{% endblock %}
+
+{% block content %}
+
+<h2>Add Production Batch</h2>
+
+<form method="POST">
+
+<div class="mb-3">
+
+<label class="form-label">
+Plant
+</label>
+
+<select
+class="form-select"
+name="plant_id"
+required>
+
+{% for plant in plants %}
+
+<option value="{{ plant.id }}">
+{{ plant.name }}
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+Variety
+</label>
+
+<input
+type="text"
+class="form-control"
+name="variety"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+Tray Size
+</label>
+
+<select
+class="form-select"
+name="tray_size">
+
+<option value="104">104</option>
+
+<option value="126">126</option>
+
+<option value="150">150</option>
+
+<option value="200">200</option>
+
+</select>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+Tray Count
+</label>
+
+<input
+type="number"
+class="form-control"
+name="tray_count"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+Sowing Date
+</label>
+
+<input
+type="date"
+class="form-control"
+name="sowing_date"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">
+Ready Date
+</label>
+
+<input
+type="date"
+class="form-control"
+name="ready_date"
+required>
+
+</div>
+
+<button
+class="btn btn-success">
+
+Save Batch
+
+</button>
+
+</form>
+
+{% endblock %}

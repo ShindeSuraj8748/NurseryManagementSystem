@@ -12,18 +12,248 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+
     <div class="container">
 
-        <a class="navbar-brand" href="/">🌱 Ghodeshwari Hitech Nursery</a>
+        <a class="navbar-brand"
+           href="{{ url_for('main.home') }}">
+            🌱 Ghodeshwari Hitech Nursery
+        </a>
 
-        <div class="navbar-nav">
-            <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
-            <a class="nav-link" href="{{ url_for('plants.plant_list') }}">Plants</a>
-            <a class="nav-link" href="{{ url_for('plants.add_plant') }}">Add Plant</a>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse"
+             id="navbarNav">
+
+            <ul class="navbar-nav me-auto">
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{{ url_for('main.home') }}">
+                        Dashboard
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{{ url_for('plants.plant_list') }}">
+                        Plants
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{{ url_for('batches.batch_list') }}">
+                        Production
+                    </a>
+
+                </li>
+
+                <!-- Masters -->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown">
+
+                        Masters
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+
+                            <a class="dropdown-item"
+                               href="{{ url_for('company.company_list') }}">
+
+                                Seed Companies
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a class="dropdown-item"
+                               href="#">
+
+                                Varieties
+                                <span class="badge bg-warning text-dark">
+                                    Soon
+                                </span>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a class="dropdown-item"
+                            href="{{ url_for('tray.tray_list') }}">
+                                Tray Sizes
+                            </a>
+                                <span class="badge bg-warning text-dark">
+                                    Soon
+                                </span>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a class="dropdown-item"
+                               href="#">
+
+                                Plant Categories
+                                <span class="badge bg-warning text-dark">
+                                    Soon
+                                </span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <!-- Transactions -->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown">
+
+                        Transactions
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+
+                            <a class="dropdown-item"
+                               href="#">
+
+                                Bookings
+                                <span class="badge bg-warning text-dark">
+                                    Soon
+                                </span>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a class="dropdown-item"
+                               href="#">
+
+                                Direct Sales
+                                <span class="badge bg-warning text-dark">
+                                    Soon
+                                </span>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a class="dropdown-item"
+                               href="#">
+
+                                Stock Adjustment
+                                <span class="badge bg-warning text-dark">
+                                    Soon
+                                </span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+                <!-- Reports -->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown">
+
+                        Reports
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+
+                            <a class="dropdown-item"
+                               href="#">
+
+                                Nursery Reports
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a class="dropdown-item"
+                               href="#">
+
+                                Sales Reports
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a class="dropdown-item"
+                               href="#">
+
+                                Stock Reports
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </li>
+
+            </ul>
+
         </div>
 
     </div>
+
 </nav>
+
 
 <div class="container mt-4">
 

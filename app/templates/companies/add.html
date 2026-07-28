@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Company
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">
+    Add Seed Company
+</h2>
+
+<form method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Company Name
+        </label>
+
+        <input
+            type="text"
+            name="name"
+            class="form-control"
+            required>
+
+    </div>
+
+    <button class="btn btn-success">
+        Save
+    </button>
+
+    <a
+        href="{{ url_for('company.company_list') }}"
+        class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>
+
+{% endblock %}

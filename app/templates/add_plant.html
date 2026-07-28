@@ -21,19 +21,23 @@ Add Plant
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Category</label>
-                <select class="form-select" name="category">
+    <label class="form-label">Category</label>
 
-                    {% for category in categories %}
+    <select
+        class="form-select"
+        name="category_id"
+        required>
 
-                        <option value="{{ category }}">
-                            {{ category }}
-                        </option>
+        {% for category in categories %}
 
-                    {% endfor %}
+        <option value="{{ category.id }}">
+            {{ category.name }}
+        </option>
 
-                </select>
-            </div>
+        {% endfor %}
+
+    </select>
+</div>
 
             <div class="mb-3">
                 <label class="form-label">Price</label>
