@@ -40,6 +40,11 @@ class Plant(db.Model):
         back_populates="plant",
         cascade="all, delete-orphan"
     )
+    varieties = db.relationship(
+    "Variety",
+    back_populates="plant",
+    cascade="all, delete-orphan"
+)
 
     @property
     def stock(self):

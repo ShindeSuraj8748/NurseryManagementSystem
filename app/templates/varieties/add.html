@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Variety
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <div class="card-header bg-success text-white">
+
+        <h3>Add Variety</h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label>Plant</label>
+
+                <select
+                    class="form-select"
+                    name="plant_id">
+
+                    {% for plant in plants %}
+
+                    <option value="{{ plant.id }}">
+                        {{ plant.name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Company</label>
+
+                <select
+                    class="form-select"
+                    name="company_id">
+
+                    {% for company in companies %}
+
+                    <option value="{{ company.id }}">
+                        {{ company.name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Variety Name</label>
+
+                <input
+                    class="form-control"
+                    type="text"
+                    name="name"
+                    required>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Days to Ready</label>
+
+                <input
+                    class="form-control"
+                    type="number"
+                    name="days_to_ready"
+                    required>
+
+            </div>
+
+            <button class="btn btn-success">
+                Save
+            </button>
+
+            <a
+                href="{{ url_for('variety.variety_list') }}"
+                class="btn btn-secondary">
+
+                Back
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

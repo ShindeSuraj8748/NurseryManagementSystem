@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}
+Varieties
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>Varieties</h2>
+
+    <a href="{{ url_for('variety.add_variety') }}"
+       class="btn btn-success">
+
+        + Add Variety
+
+    </a>
+
+</div>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-success">
+
+        <tr>
+            <th>ID</th>
+            <th>Variety</th>
+            <th>Plant</th>
+            <th>Company</th>
+            <th>Days</th>
+            <th width="180">Action</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for variety in varieties %}
+
+        <tr>
+
+            <td>{{ variety.id }}</td>
+
+            <td>{{ variety.name }}</td>
+
+            <td>{{ variety.plant.name }}</td>
+
+            <td>{{ variety.company.name }}</td>
+
+            <td>{{ variety.days_to_ready }}</td>
+
+            <td>
+
+                <a
+                    href="{{ url_for('variety.edit_variety', id=variety.id) }}"
+                    class="btn btn-warning btn-sm">
+
+                    Edit
+
+                </a>
+
+                <a
+                    href="{{ url_for('variety.delete_variety', id=variety.id) }}"
+                    class="btn btn-danger btn-sm"
+                    onclick="return confirm('Delete this variety?')">
+
+                    Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

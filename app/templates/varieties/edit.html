@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Variety
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <div class="card-header bg-warning">
+
+        <h3>Edit Variety</h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label>Plant</label>
+
+                <select
+                    class="form-select"
+                    name="plant_id">
+
+                    {% for plant in plants %}
+
+                    <option
+                        value="{{ plant.id }}"
+                        {% if variety.plant_id == plant.id %}selected{% endif %}>
+
+                        {{ plant.name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Company</label>
+
+                <select
+                    class="form-select"
+                    name="company_id">
+
+                    {% for company in companies %}
+
+                    <option
+                        value="{{ company.id }}"
+                        {% if variety.company_id == company.id %}selected{% endif %}>
+
+                        {{ company.name }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Variety Name</label>
+
+                <input
+                    class="form-control"
+                    type="text"
+                    name="name"
+                    value="{{ variety.name }}">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Days to Ready</label>
+
+                <input
+                    class="form-control"
+                    type="number"
+                    name="days_to_ready"
+                    value="{{ variety.days_to_ready }}">
+
+            </div>
+
+            <button class="btn btn-warning">
+                Update
+            </button>
+
+            <a
+                href="{{ url_for('variety.variety_list') }}"
+                class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

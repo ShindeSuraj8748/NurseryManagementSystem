@@ -3,9 +3,18 @@ from app.database import db
 
 
 class Variety(db.Model):
+
     __tablename__ = "varieties"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    name = db.Column(
+        db.String(100),
+        nullable=False
+    )
 
     plant_id = db.Column(
         db.Integer,
@@ -19,9 +28,10 @@ class Variety(db.Model):
         nullable=False
     )
 
-    name = db.Column(
-        db.String(100),
-        nullable=False
+    days_to_ready = db.Column(
+        db.Integer,
+        nullable=False,
+        default=25
     )
 
     created_at = db.Column(
@@ -37,9 +47,4 @@ class Variety(db.Model):
     company = db.relationship(
         "Company",
         back_populates="varieties"
-    )
-
-    batches = db.relationship(
-        "PlantBatch",
-        back_populates="variety"
     )

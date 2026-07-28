@@ -90,13 +90,8 @@
                         <li>
 
                             <a class="dropdown-item"
-                               href="#">
-
+                            href="{{ url_for('variety.variety_list') }}">
                                 Varieties
-                                <span class="badge bg-warning text-dark">
-                                    Soon
-                                </span>
-
                             </a>
 
                         </li>
@@ -117,15 +112,10 @@
 
                         <li>
 
-                            <a class="dropdown-item"
-                               href="#">
-
-                                Plant Categories
-                                <span class="badge bg-warning text-dark">
-                                    Soon
-                                </span>
-
-                            </a>
+                     <a class="dropdown-item"
+                        href="{{ url_for('categories.category_list') }}">
+                            Plant Categories
+                        </a>
 
                         </li>
 

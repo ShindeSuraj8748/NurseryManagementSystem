@@ -62,7 +62,7 @@ def add_plant():
         name = request.form["name"]
         category_id = request.form["category_id"]
         price = request.form["price"]
-        quantity = request.form["quantity"]
+        
 
         image = request.files.get("image")
 
@@ -92,7 +92,6 @@ def add_plant():
         name=name,
         category_id=category_id,
         price=price,
-        quantity=quantity,
         image=filename,
     )
 
@@ -171,7 +170,7 @@ def edit_plant(id):
         plant.name = request.form["name"]
         plant.category_id = request.form["category_id"]
         plant.price = request.form["price"]
-        plant.quantity = request.form["quantity"]
+      
 
         image = request.files.get("image")
 

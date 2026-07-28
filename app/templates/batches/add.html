@@ -1,123 +1,236 @@
 {% extends "base.html" %}
 
 {% block title %}
-Add Batch
+Add Production Batch
 {% endblock %}
 
 {% block content %}
 
-<h2>Add Production Batch</h2>
+<div class="card">
 
-<form method="POST">
+    <div class="card-header bg-success text-white">
 
-<div class="mb-3">
+        <h3>Add Production Batch</h3>
 
-<label class="form-label">
-Plant
-</label>
+    </div>
 
-<select
-class="form-select"
-name="plant_id"
-required>
+    <div class="card-body">
 
-{% for plant in plants %}
+        <form method="POST">
 
-<option value="{{ plant.id }}">
-{{ plant.name }}
-</option>
+            <div class="mb-3">
 
-{% endfor %}
+                <label class="form-label">
+                    Plant
+                </label>
 
-</select>
+                <select
+                    class="form-select"
+                    name="plant_id"
+                    id="plant"
+                    required>
+
+                    <option value="">
+                        Select Plant
+                    </option>
+
+                    {% for plant in plants %}
+
+                    <option value="{{ plant.id }}">
+                        {{ plant.name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Variety
+                </label>
+
+                <select
+                    class="form-select"
+                    name="variety_id"
+                    id="variety"
+                    required>
+
+                    <option value="">
+                        Select Variety
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Tray Size
+                </label>
+
+                <select
+                    class="form-select"
+                    name="tray_size_id"
+                    id="tray"
+                    required>
+
+                    {% for tray in tray_sizes %}
+
+                    <option
+                        value="{{ tray.id }}"
+                        data-count="{{ tray.plant_count }}">
+
+                        {{ tray.name }} ({{ tray.plant_count }} plants)
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Number of Trays
+                </label>
+
+                <input
+                    type="number"
+                    class="form-control"
+                    id="trayCount"
+                    name="number_of_trays"
+                    min="1"
+                    required>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Estimated Plants
+                </label>
+
+                <input
+                    type="number"
+                    class="form-control"
+                    id="estimatedPlants"
+                    readonly>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Sowing Date
+                </label>
+
+                <input
+                    type="date"
+                    class="form-control"
+                    name="sowing_date"
+                    required>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Remarks
+                </label>
+
+                <textarea
+                    class="form-control"
+                    rows="3"
+                    name="remarks"></textarea>
+
+            </div>
+
+            <button class="btn btn-success">
+
+                Save Batch
+
+            </button>
+
+            <a
+                href="{{ url_for('batches.batch_list') }}"
+                class="btn btn-secondary">
+
+                Back
+
+            </a>
+
+        </form>
+
+    </div>
 
 </div>
 
-<div class="mb-3">
+<script>
 
-<label class="form-label">
-Variety
-</label>
+const plant = document.getElementById("plant");
+const variety = document.getElementById("variety");
 
-<input
-type="text"
-class="form-control"
-name="variety"
-required>
+plant.addEventListener("change", function(){
 
-</div>
+    fetch("/api/varieties/" + this.value)
 
-<div class="mb-3">
+    .then(response => response.json())
 
-<label class="form-label">
-Tray Size
-</label>
+    .then(data => {
 
-<select
-class="form-select"
-name="tray_size">
+        variety.innerHTML =
+        '<option value="">Select Variety</option>';
 
-<option value="104">104</option>
+        data.forEach(function(v){
 
-<option value="126">126</option>
+            variety.innerHTML +=
+            `<option value="${v.id}">
+                ${v.name}
+            </option>`;
 
-<option value="150">150</option>
+        });
 
-<option value="200">200</option>
+    });
 
-</select>
+});
 
-</div>
+const tray = document.getElementById("tray");
 
-<div class="mb-3">
+const trayCount = document.getElementById("trayCount");
 
-<label class="form-label">
-Tray Count
-</label>
+const estimatedPlants =
+document.getElementById("estimatedPlants");
 
-<input
-type="number"
-class="form-control"
-name="tray_count"
-required>
+function calculatePlants(){
 
-</div>
+    const count =
+    tray.options[tray.selectedIndex]
+        .dataset.count;
 
-<div class="mb-3">
+    const trays =
+    trayCount.value || 0;
 
-<label class="form-label">
-Sowing Date
-</label>
+    estimatedPlants.value =
+    count * trays;
 
-<input
-type="date"
-class="form-control"
-name="sowing_date"
-required>
+}
 
-</div>
+tray.addEventListener(
+    "change",
+    calculatePlants
+);
 
-<div class="mb-3">
+trayCount.addEventListener(
+    "input",
+    calculatePlants
+);
 
-<label class="form-label">
-Ready Date
-</label>
-
-<input
-type="date"
-class="form-control"
-name="ready_date"
-required>
-
-</div>
-
-<button
-class="btn btn-success">
-
-Save Batch
-
-</button>
-
-</form>
+</script>
 
 {% endblock %}

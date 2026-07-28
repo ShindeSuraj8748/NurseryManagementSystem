@@ -58,13 +58,11 @@ def add_tray():
 
     if request.method == "POST":
 
-        name = request.form["name"]
+        name = request.form["name"].strip()
 
-        rows = int(request.form["rows"])
-
-        columns = int(request.form["columns"])
-
-        status = request.form["status"]
+        plant_count = int(
+            request.form["plant_count"]
+        )
 
         if TraySize.query.filter_by(name=name).first():
 
@@ -75,19 +73,12 @@ def add_tray():
 
             return redirect(request.url)
 
-        plants_per_tray = rows * columns
-
         tray_size = TraySize(
 
             name=name,
 
-            rows=rows,
+            plant_count=plant_count
 
-            columns=columns,
-
-            plants_per_tray=plants_per_tray,
-
-            status=status
         )
 
         db.session.add(tray_size)
@@ -107,7 +98,6 @@ def add_tray():
         "tray_sizes/add.html"
     )
 
-
 # ==========================
 # EDIT
 # ==========================
@@ -124,19 +114,8 @@ def edit_tray(id):
 
         tray_size.name = request.form["name"]
 
-        tray_size.rows = int(
-            request.form["rows"]
-        )
-
-        tray_size.columns = int(
-            request.form["columns"]
-        )
-
-        tray_size.status = request.form["status"]
-
-        tray_size.plants_per_tray = (
-            tray_size.rows *
-            tray_size.columns
+        tray_size.plant_count = int(
+            request.form["plant_count"]
         )
 
         db.session.commit()

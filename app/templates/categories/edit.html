@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}
-Edit Tray Size
+Edit Category
 {% endblock %}
 
 {% block content %}
 
-<h2>Edit Tray Size</h2>
+<h2>Edit Category</h2>
 
 <form method="POST">
 
@@ -14,7 +14,7 @@ Edit Tray Size
 
         <label class="form-label">
 
-            Tray Name
+            Category Name
 
         </label>
 
@@ -22,24 +22,7 @@ Edit Tray Size
             type="text"
             class="form-control"
             name="name"
-            value="{{ tray.name }}"
-            required>
-
-    </div>
-
-    <div class="mb-3">
-
-        <label class="form-label">
-
-            Plants Per Tray
-
-        </label>
-
-        <input
-            type="number"
-            class="form-control"
-            name="plant_count"
-            value="{{ tray.plant_count }}"
+            value="{{ category.name }}"
             required>
 
     </div>
@@ -51,7 +34,7 @@ Edit Tray Size
     </button>
 
     <a
-        href="{{ url_for('tray.tray_list') }}"
+        href="{{ url_for('categories.category_list') }}"
         class="btn btn-secondary">
 
         Back

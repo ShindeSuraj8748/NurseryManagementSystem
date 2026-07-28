@@ -16,11 +16,14 @@ class PlantBatch(db.Model):
         nullable=False
     )
 
-    # Temporary
-    # Later this will become variety_id
-    variety = db.Column(
-        db.String(100),
-        nullable=False
+    variety_id = db.Column(
+    db.Integer,
+    db.ForeignKey("varieties.id"),
+    nullable=False
+)
+
+    variety = db.relationship(
+        "Variety"
     )
 
     tray_size_id = db.Column(
@@ -29,10 +32,10 @@ class PlantBatch(db.Model):
         nullable=False
     )
 
-    plants_per_tray = db.Column(
-        db.Integer,
-        nullable=False
-    )
+    number_of_trays = db.Column(
+    db.Integer,
+    nullable=False
+)
 
     estimated_plants = db.Column(
         db.Integer,
