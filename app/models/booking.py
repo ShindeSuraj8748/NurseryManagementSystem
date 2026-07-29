@@ -43,9 +43,10 @@ class Booking(db.Model):
     )
 
     status = db.Column(
-        db.String(30),
-        default="Pending"
-    )
+    db.String(30),
+    nullable=False,
+    default="Pending"
+)
 
     remarks = db.Column(
         db.Text
@@ -57,12 +58,44 @@ class Booking(db.Model):
     )
 
     customer = db.relationship(
-        "Customer",
-        back_populates="bookings"
-    )
+    "Customer",
+    back_populates="bookings"
+)
 
     items = db.relationship(
         "BookingItem",
         back_populates="booking",
         cascade="all, delete-orphan"
     )
+    
+    def calculate_totals(self):
+
+        self.total_amount = sum(
+            item.total_price
+            for item in self.items
+        )
+
+        self.balance_amount = (
+            self.total_amount
+            - self.advance_amount
+        )
+        
+    def complete(self):
+
+        if self.status == "Completed":
+            return
+
+        self.status = "Completed"
+
+        for item in self.items:
+
+            batch = item.batch
+
+            batch.reserved_plants = max(
+                0,
+                batch.reserved_plants - item.quantity
+            )
+
+            batch.sold_plants += item.quantity
+
+        self.balance_amount = 0

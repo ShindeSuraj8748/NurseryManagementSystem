@@ -11,6 +11,8 @@ from app.routes.tray_sizes import tray
 from app.routes.variety import variety
 from app.routes.categories import categories
 from app.routes.customers import customers
+from app.routes.bookings import bookings
+
 migrate = Migrate()
 
 
@@ -30,6 +32,8 @@ def create_app():
     app.register_blueprint(variety)
     app.register_blueprint(categories)
     app.register_blueprint(customers)
+    app.register_blueprint(bookings)
+    
 
     @app.errorhandler(RequestEntityTooLarge)
     def handle_large_file(e):

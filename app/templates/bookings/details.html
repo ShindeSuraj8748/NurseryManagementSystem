@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<h2>
+<a href="{{ url_for('bookings.booking_details', booking_id=booking.id) }}">
+
+{{ booking.booking_no }}
+
+</a>
+</h2>
+
+<hr>
+
+<div class="row">
+
+<div class="col-md-6">
+
+<h4>Customer</h4>
+
+<p>
+<b>Name :</b>
+{{ booking.customer.name }}
+</p>
+
+<p>
+<b>Mobile :</b>
+{{ booking.customer.mobile }}
+</p>
+
+</div>
+
+<div class="col-md-6">
+
+<h4>Booking</h4>
+
+<p>
+<b>Date :</b>
+{{ booking.booking_date }}
+</p>
+
+<p>
+<b>Status :</b>
+
+<span class="badge bg-primary">
+
+{{ booking.status }}
+
+</span>
+
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<h4>Items</h4>
+
+<table class="table table-bordered">
+
+<thead>
+
+<tr>
+
+<th>Plant</th>
+
+<th>Variety</th>
+
+<th>Quantity</th>
+
+<th>Price</th>
+
+<th>Total</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for item in booking.items %}
+
+<tr>
+
+<td>
+
+{{ item.batch.plant.name }}
+
+</td>
+
+<td>
+
+{{ item.batch.variety.name }}
+
+</td>
+
+<td>
+
+{{ item.quantity }}
+
+</td>
+
+<td>
+
+₹{{ item.price_per_plant }}
+
+</td>
+
+<td>
+
+₹{{ item.total_price }}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+<hr>
+
+<div class="row">
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Total</h5>
+
+<h3>
+
+₹{{ booking.total_amount }}
+
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Advance</h5>
+
+<h3>
+
+₹{{ booking.advance_amount }}
+
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Balance</h5>
+
+<h3>
+
+₹{{ booking.balance_amount }}
+
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<br>
+
+<a
+href="{{ url_for('bookings.booking_list') }}"
+class="btn btn-secondary">
+
+Back
+
+</a>
+
+<a
+href="{{ url_for('bookings.deliver_booking', booking_id=booking.id) }}"
+class="btn btn-success">
+
+Deliver Plants
+
+</a>
+
+</div>
+
+{% endblock %}

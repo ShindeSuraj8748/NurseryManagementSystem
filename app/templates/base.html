@@ -33,216 +33,133 @@
              id="navbarNav">
 
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('customers.customer_list') }}">
-        Customers
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ url_for('main.home') }}">
+        Dashboard
     </a>
 </li>
 
-                <li class="nav-item">
+<li class="nav-item">
+    <a class="nav-link" href="{{ url_for('plants.plant_list') }}">
+        Plants
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ url_for('batches.batch_list') }}">
+        Production
+    </a>
+</li>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle"
+       href="#"
+       data-bs-toggle="dropdown">
+        Masters
+    </a>
 
-                    <a class="nav-link"
-                       href="{{ url_for('main.home') }}">
-                        Dashboard
-                    </a>
+    <ul class="dropdown-menu">
 
-                </li>
+        <li>
+            <a class="dropdown-item"
+               href="{{ url_for('company.company_list') }}">
+                Seed Companies
+            </a>
+        </li>
 
-                <li class="nav-item">
+        <li>
+            <a class="dropdown-item"
+               href="{{ url_for('categories.category_list') }}">
+                Categories
+            </a>
+        </li>
 
-                    <a class="nav-link"
-                       href="{{ url_for('plants.plant_list') }}">
-                        Plants
-                    </a>
+        <li>
+            <a class="dropdown-item"
+               href="{{ url_for('variety.variety_list') }}">
+                Varieties
+            </a>
+        </li>
 
-                </li>
+        <li>
+            <a class="dropdown-item"
+               href="{{ url_for('tray.tray_list') }}">
+                Tray Sizes
+            </a>
+        </li>
 
-                <li class="nav-item">
+    </ul>
 
-                    <a class="nav-link"
-                       href="{{ url_for('batches.batch_list') }}">
-                        Production
-                    </a>
+</li>
 
-                </li>
+<li class="nav-item dropdown">
 
-                <!-- Masters -->
+    <a class="nav-link dropdown-toggle"
+       href="#"
+       data-bs-toggle="dropdown">
 
-                <li class="nav-item dropdown">
+        Transactions
 
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       role="button"
-                       data-bs-toggle="dropdown">
+    </a>
 
-                        Masters
+    <ul class="dropdown-menu">
 
-                    </a>
+        <li>
+            <a class="dropdown-item"
+               href="{{ url_for('customers.customer_list') }}">
+                Customers
+            </a>
+        </li>
 
-                    <ul class="dropdown-menu">
+        <li>
+            <a class="dropdown-item"
+               href="{{ url_for('bookings.booking_list') }}">
+                Bookings
+            </a>
+        </li>
 
-                        <li>
+        <li>
+            <a class="dropdown-item"
+               href="#">
+                Deliveries
+            </a>
+        </li>
 
-                            <a class="dropdown-item"
-                               href="{{ url_for('company.company_list') }}">
+        <li>
+            <a class="dropdown-item"
+               href="#">
+                Stock Adjustment
+            </a>
+        </li>
 
-                                Seed Companies
+    </ul>
 
-                            </a>
+</li>
 
-                        </li>
+<li class="nav-item dropdown">
 
-                        <li>
+    <a class="nav-link dropdown-toggle"
+       href="#"
+       data-bs-toggle="dropdown">
 
-                            <a class="dropdown-item"
-                            href="{{ url_for('variety.variety_list') }}">
-                                Varieties
-                            </a>
+        Reports
 
-                        </li>
+    </a>
 
-                        <li>
+    <ul class="dropdown-menu">
 
-                            <a class="dropdown-item"
-                            href="{{ url_for('tray.tray_list') }}">
-                                Tray Sizes
-                            </a>
-                                <span class="badge bg-warning text-dark">
-                                    Soon
-                                </span>
+        <li><a class="dropdown-item" href="#">Inventory</a></li>
 
-                            </a>
+        <li><a class="dropdown-item" href="#">Sales</a></li>
 
-                        </li>
+        <li><a class="dropdown-item" href="#">Customer Ledger</a></li>
 
-                        <li>
+    </ul>
 
-                     <a class="dropdown-item"
-                        href="{{ url_for('categories.category_list') }}">
-                            Plant Categories
-                        </a>
+</li>
 
-                        </li>
-
-                    </ul>
-
-                </li>
-
-                <!-- Transactions -->
-
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       role="button"
-                       data-bs-toggle="dropdown">
-
-                        Transactions
-
-                    </a>
-
-                    <ul class="dropdown-menu">
-
-                        <li>
-
-                            <a class="dropdown-item"
-                               href="#">
-
-                                Bookings
-                                <span class="badge bg-warning text-dark">
-                                    Soon
-                                </span>
-
-                            </a>
-
-                        </li>
-
-                        <li>
-
-                            <a class="dropdown-item"
-                               href="#">
-
-                                Direct Sales
-                                <span class="badge bg-warning text-dark">
-                                    Soon
-                                </span>
-
-                            </a>
-
-                        </li>
-
-                        <li>
-
-                            <a class="dropdown-item"
-                               href="#">
-
-                                Stock Adjustment
-                                <span class="badge bg-warning text-dark">
-                                    Soon
-                                </span>
-
-                            </a>
-
-                        </li>
-
-                    </ul>
-
-                </li>
-
-                <!-- Reports -->
-
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       role="button"
-                       data-bs-toggle="dropdown">
-
-                        Reports
-
-                    </a>
-
-                    <ul class="dropdown-menu">
-
-                        <li>
-
-                            <a class="dropdown-item"
-                               href="#">
-
-                                Nursery Reports
-
-                            </a>
-
-                        </li>
-
-                        <li>
-
-                            <a class="dropdown-item"
-                               href="#">
-
-                                Sales Reports
-
-                            </a>
-
-                        </li>
-
-                        <li>
-
-                            <a class="dropdown-item"
-                               href="#">
-
-                                Stock Reports
-
-                            </a>
-
-                        </li>
-
-                    </ul>
-
-                </li>
-
-            </ul>
-
+</ul>
         </div>
 
     </div>

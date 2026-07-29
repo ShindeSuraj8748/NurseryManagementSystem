@@ -1,13 +1,9 @@
 from app.database import db
 
-
 class BookingItem(db.Model):
     __tablename__ = "booking_items"
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
+    id = db.Column(db.Integer, primary_key=True)
 
     booking_id = db.Column(
         db.Integer,
@@ -21,28 +17,17 @@ class BookingItem(db.Model):
         nullable=False
     )
 
-    # Snapshot fields
-    plant_name = db.Column(
-        db.String(100),
-        nullable=False
-    )
-
-    variety_name = db.Column(
-        db.String(100),
-        nullable=False
-    )
-
     quantity = db.Column(
         db.Integer,
         nullable=False
     )
 
-    rate = db.Column(
+    price_per_plant = db.Column(
         db.Numeric(10, 2),
         nullable=False
     )
 
-    amount = db.Column(
+    total_price = db.Column(
         db.Numeric(10, 2),
         nullable=False
     )
@@ -55,3 +40,9 @@ class BookingItem(db.Model):
     batch = db.relationship(
         "PlantBatch"
     )
+    
+    line_no = db.Column(
+    db.Integer,
+    nullable=False,
+    default=1
+)

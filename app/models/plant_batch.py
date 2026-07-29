@@ -42,6 +42,36 @@ class PlantBatch(db.Model):
     nullable=False
 )
 
+    reserved_plants = db.Column(
+        db.Integer,
+        default=0,
+        nullable=False
+    )
+
+    sold_plants = db.Column(
+        db.Integer,
+        default=0,
+        nullable=False
+    )
+
+    damaged_plants = db.Column(
+        db.Integer,
+        default=0,
+        nullable=False
+    )
+
+    imported_plants = db.Column(
+        db.Integer,
+        default=0,
+        nullable=False
+    )
+
+    exported_plants = db.Column(
+        db.Integer,
+        default=0,
+        nullable=False
+    )
+
     selling_price = db.Column(
         db.Numeric(10, 2),
         nullable=False
@@ -83,3 +113,32 @@ class PlantBatch(db.Model):
         "TraySize",
         back_populates="batches"
     )
+    
+    @property
+    def physical_stock(self):
+        return (
+            self.estimated_plants
+            + self.imported_plants
+            - self.exported_plants
+            - self.sold_plants
+            - self.damaged_plants
+        )
+
+    @property
+    def available_plants(self):
+        return self.physical_stock - self.reserved_plants
+
+    @property
+    def shortage(self):
+        if self.available_plants < 0:
+            return abs(self.available_plants)
+        return 0
+        
+    @property
+    def batch_name(self):
+        return f"{self.plant.name} - {self.variety.name} - Batch {self.id}"
+
+
+    @property
+    def current_price(self):
+        return float(self.selling_price)

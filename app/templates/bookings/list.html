@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Bookings</h2>
+
+<a
+href="{{ url_for('bookings.add_booking') }}"
+class="btn btn-primary">
+
+New Booking
+
+</a>
+
+<hr>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>No</th>
+
+<th>Customer</th>
+
+<th>Total</th>
+
+<th>Advance</th>
+
+<th>Balance</th>
+
+<th>Status</th>
+
+</tr>
+
+{% for b in bookings %}
+
+<tr>
+
+<td>
+    <a href="{{ url_for('bookings.booking_details', booking_id=b.id) }}">
+        {{ b.booking_no }}
+    </a>
+</td>
+
+<td>{{ b.customer.name }}</td>
+
+<td>{{ b.total_amount }}</td>
+
+<td>{{ b.advance_amount }}</td>
+
+<td>{{ b.balance_amount }}</td>
+
+<td>{{ b.status }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

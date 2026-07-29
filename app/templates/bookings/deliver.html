@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<h2>Confirm Delivery</h2>
+
+<hr>
+
+<div class="card mb-3">
+
+<div class="card-body">
+
+<h4>{{ booking.booking_no }}</h4>
+
+<p>
+
+<b>Customer :</b>
+
+{{ booking.customer.name }}
+
+</p>
+
+<p>
+
+<b>Booking Date :</b>
+
+{{ booking.booking_date }}
+
+</p>
+
+<p>
+
+<b>Status :</b>
+
+{{ booking.status }}
+
+</p>
+
+</div>
+
+</div>
+
+<table class="table table-bordered">
+
+<thead>
+
+<tr>
+
+<th>Plant</th>
+
+<th>Variety</th>
+
+<th>Quantity</th>
+
+<th>Price</th>
+
+<th>Total</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for item in booking.items %}
+
+<tr>
+
+<td>{{ item.batch.plant.name }}</td>
+
+<td>{{ item.batch.variety.name }}</td>
+
+<td>{{ item.quantity }}</td>
+
+<td>₹{{ item.price_per_plant }}</td>
+
+<td>₹{{ item.total_price }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+<hr>
+
+<div class="row">
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Total</h5>
+
+<h3>₹{{ booking.total_amount }}</h3>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Advance</h5>
+
+<h3>₹{{ booking.advance_amount }}</h3>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Balance</h5>
+
+<h3>₹{{ booking.balance_amount }}</h3>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<br>
+
+<form method="POST">
+
+<a
+href="{{ url_for('bookings.booking_details', booking_id=booking.id) }}"
+class="btn btn-secondary">
+
+Back
+
+</a>
+
+<button
+type="submit"
+class="btn btn-success">
+
+Confirm Delivery
+
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}
