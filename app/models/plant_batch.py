@@ -38,14 +38,19 @@ class PlantBatch(db.Model):
 )
 
     estimated_plants = db.Column(
-        db.Integer,
+    db.Integer,
+    nullable=False
+)
+
+    selling_price = db.Column(
+        db.Numeric(10, 2),
         nullable=False
     )
 
     sowing_date = db.Column(
         db.Date,
         nullable=False
-    )
+)
 
     ready_date = db.Column(
         db.Date

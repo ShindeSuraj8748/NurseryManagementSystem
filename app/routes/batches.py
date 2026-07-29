@@ -40,7 +40,8 @@ def add_batch():
     plants = Plant.query.order_by(
         Plant.name
     ).all()
-
+    
+    
     tray_sizes = TraySize.query.order_by(
         TraySize.plant_count
     ).all()
@@ -63,6 +64,10 @@ def add_batch():
         ).date()
 
         remarks = request.form["remarks"]
+        
+        selling_price = float(
+            request.form["selling_price"]
+        )
 
         variety = Variety.query.get_or_404(
             variety_id
@@ -99,7 +104,7 @@ def add_batch():
             sowing_date=sowing_date,
 
             ready_date=ready_date,
-
+            selling_price=selling_price,
             remarks=remarks
 
         )

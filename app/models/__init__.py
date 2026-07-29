@@ -4,3 +4,6 @@ from app.models.company import Company
 from app.models.tray_size import TraySize
 from app.models.category import Category
 from app.models.variety import Variety
+from .customer import Customer
+from .booking import Booking
+from .booking_item import BookingItem
